@@ -405,6 +405,10 @@ class Message {
         $attachment->content_type = $type.'/'.strtolower($structure->subtype);
         $attachment->content = $this->decodeString($content, $structure->encoding);
 
+        if(!isset($structure->disposition)){
+           $structure->disposition = null;
+        }
+        
         $attachment->id = false;
         if (property_exists($structure, 'id')) {
             $attachment->id = str_replace(['<', '>'], '', $structure->id);
