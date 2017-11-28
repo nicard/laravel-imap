@@ -230,7 +230,8 @@ class Message {
             $this->subject = imap_utf8($header->subject);
         }
         if (property_exists($header, 'date')) {
-            $this->date = Carbon::parse(str_replace(array('(',')'), "", $header->date));
+            $data = str_replace('/', '-', str_replace(array('(',')'), "", $header->date));
+            $this->date = Carbon::parse($data)->format('Y-m-d H:i:s');
         }
 
         if (property_exists($header, 'from')) {
